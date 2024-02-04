@@ -58,8 +58,66 @@
       // 🧠 Implement a `getAllReversed` method which returns the ints in reverse order
       // ❗ WARNING: except for `getAllReversed`, methods must respect the order of the integers
       // ❗ WARNING: note that none of the methods actually mutate the `ints` property
-
+      
+      constructor (...args) {
+        this.ints = args;
+      }
+      getAll() {
+        return this.ints;
+      }
+      getEvens() {
+        let evens = [];
+        for (let idx = 0; idx < this.ints.length; idx++) {
+        if (this.ints[idx] % 2 === 0) {
+          evens.push(this.ints[idx]);
+        }
+      }
+        return evens;
+      }
+    getNegatives() {
+      let negs = [];
+      for (let idx = 0; idx < this.ints.length; idx++) {
+        if (this.ints[idx] < 0) {
+          negs.push(this.ints[idx]);
+        }
+      }
+      return negs;
     }
+    getAllSquared() {
+      let sqrd = [];
+      for (let idx = 0; idx < this.ints.length; idx++) {
+        sqrd.push(this.ints[idx] * this.ints[idx]);
+      }
+      return sqrd;
+    }
+    pop() {
+      return this.ints.pop();
+    }
+    push(int) {
+      this.ints.push(int);
+      return this.ints;
+    }
+    getEveryNth(n) {
+      let everyNth = [];
+      let sum = 0;
+      for (let idx = 0; idx < this.ints.length; idx++) {
+        if (sum === idx) {
+        everyNth.push(this.ints[idx]);
+        sum += n;
+        }
+        
+      }
+      return everyNth;
+    }
+    getAllReversed() {
+      let reversed = [];
+      for (let idx = this.ints.length - 1; idx >= 0; idx-- ){
+        reversed.push(this.ints[idx]);
+      }
+      return reversed;
+    }
+  }
+
 
     // 👉 CHALLENGE 2 NerfGun
     class NerfGun {
@@ -76,6 +134,41 @@
       //      * When engaging the safety, return "Safety enabled!"
       //      * When disengaging the safety, return "Safety disabled!"
       // 🌟 HINT: instances need to keep track of their maximum capacity as well as their current capacity
+
+      constructor (args) {
+        this.currentCapacity = args;
+        this.maxCapacity = args;
+        this.safetyOn = true;
+      }
+      shoot() {
+        if (this.currentCapacity === 0 || this.safetyOn === true) {
+          return 'Click!'
+        } else if ((this.currentCapacity >= 1 && this.safetyOn === false)) {       
+          this.currentCapacity -= 1;
+          return 'Bang!'
+        }
+      }
+      toggleSafety() {
+        this.safetyOn = !this.safetyOn;
+        if (this.safetyOn === false) {
+          return "Safety disabled!";
+        } else {
+          return "Safety enabled!";
+        }
+      }
+      reload(num) {
+        let result = "";
+        if (num <= 0 || typeof num != "number" ) {
+          result = "Error reloading!";
+        } else if (num < (this.maxCapacity - this.currentCapacity)) {
+          this.currentCapacity += num;
+          result = `${this.currentCapacity} projectiles left!`
+        } else {
+          this.currentCapacity = this.maxCapacity;
+          result =  `${this.currentCapacity} projectiles left!`
+       }
+       return result;
+      }
 
     }
 
@@ -95,6 +188,15 @@
       //    ebook.next() // returns null
       // 🌟 HINT: remember about the `slice` method which strings and arrays have
       // ❗ Feel free to implement `back`, although this is not required nor graded
+
+      constructor (str, chars) {
+        this.str = str;
+        this.chars = chars;
+      }
+      next() {
+
+   
+      }
 
     }
 
