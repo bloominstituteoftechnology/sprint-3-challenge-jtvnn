@@ -192,10 +192,18 @@
       constructor (str, chars) {
         this.str = str;
         this.chars = chars;
+        this.position = 0;
       }
       next() {
-
-   
+      //  let results = [];
+      //   for(let idx = 0; idx < this.str.length; idx += this.chars) {
+      //   results.push(this.str.slice(idx, idx + this.chars)); 
+      if (this.position < this.str.length) {
+        let result = this.str.slice(this.position, this.position + this.chars);
+        this.position += this.chars;
+        return result;
+      }
+      return null;
       }
 
     }
@@ -233,7 +241,36 @@
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing, refactor to use map/filter
 
+      constructor(...args) {
+      this.ants = [];
+        for(let arg of args) {
+          this.ants.push({
+            name: arg,
+            health: 100
+          });
+        }
+      }
+      work() {
+      let count = 0
+      this.ants = this.ants.filter(ant=> {
+        ant.health -= 20;
+        count += 1;
+        return ant.health > 0;
+      })
+      return count !== 0 ? `${count} ants starting work!` : `No ants here. Did you work them to death?`;
     }
+      feed(name) {
+        let found = false;
+        for (let ant of this.ants) {
+          if (ant.name === name) {
+            ant.health += 15;
+            found = true;
+          }          
+        }
+        return found ? "Yum!" : `${name} not found!`;
+      }
+    }
+
 
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
